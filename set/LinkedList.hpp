@@ -44,7 +44,6 @@ class LinkedList
 
         bool add(T element)
         {
-            cout<<"add"<<endl;
             Node<T>* newNode = new Node<T>(element);
             if(this->head == nullptr)
             {
@@ -124,12 +123,12 @@ class LinkedList
             {
                 if(current->value == element)
                 {
-                    cout << "Element " << element << " found at: "<< i << endl;
+                    // cout << "Element " << element << " found at: "<< i << endl;
                     return i;
                 }
                 current = current->next;
             }
-            cout << "Element " << element << "not found" << endl;
+            // cout << "Element " << element << "not found" << endl;
             return -1;
         }
 
@@ -179,6 +178,31 @@ class LinkedList
                 return true;
             }
             return true;
+        }
+
+        bool operator==(LinkedList& l2)
+        {
+            if(getSize() != l2.getSize())
+            {
+                return false;
+            }
+            else
+            {
+                Node<T>* temp1;
+                Node<T>* temp2;
+                temp1 = nextNode();
+                temp2 = l2.nextNode();
+                while(temp1 != nullptr && temp2 != nullptr)
+                {
+                    if(temp1->value != temp2->value)
+                    {
+                        return false;
+                    }
+                    temp1 = nextNode();
+                    temp2 = l2.nextNode();
+                }
+                return true;
+            }
         }
 
         void print()

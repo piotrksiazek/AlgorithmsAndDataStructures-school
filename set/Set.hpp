@@ -45,13 +45,19 @@ class Set
         void intersection(const Set &other)
         {
             Node<T> *currentNode;
-            while((currentNode = other.list->nextNode()) != nullptr)
+            LinkedList<T> *toRemove = new LinkedList<T>();
+            while((currentNode = this->list->nextNode()) != nullptr)
             {
                 T value = currentNode->value;
-                if(!(this->contains(value) && other.contains(value)))
+                if(!other.contains(value))
                 {
-                    this->remove(value);
+                    toRemove->add(value);
                 }
+            }
+            while((currentNode = toRemove->nextNode()) != nullptr)
+            {
+                T value = currentNode->value;
+                this->remove(value);
             }
         }
 
@@ -66,6 +72,11 @@ class Set
                     this->remove(value);
                 }
             }
+        }
+
+        bool operator==(Set& l2)
+        {
+            return *this->list == *l2.list;
         }
 
         void print()
