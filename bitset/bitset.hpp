@@ -41,13 +41,21 @@ class BitSet
         void insert(int value)
         {
             int tabIndex = this->getTabIndex(value);
+            unsigned char oldByte = this->tab[tabIndex];
+
             tab[tabIndex] |= (1 << getBitShift(value, tabIndex));
+
+            changeSizeCount(oldByte, this->tab[tabIndex]);
         }
 
         void remove(int value)
         {
             int tabIndex = this->getTabIndex(value);
+            unsigned char oldByte = this->tab[tabIndex];
+
             tab[tabIndex] &= ~(1 << getBitShift(value, tabIndex));
+
+            changeSizeCount(oldByte, this->tab[tabIndex]);
         }
 
         bool contains(int value) const
@@ -57,9 +65,9 @@ class BitSet
             return (byte & (1 << this->getBitShift(value, tabIndex))) > 0;
         }
 
-        int size()
+        int getSize()
         {
-            
+            return this->size;
         }
 
         // void Union(const set &other)
