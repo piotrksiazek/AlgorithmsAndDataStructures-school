@@ -3,10 +3,10 @@
 using namespace std;
 
 template<typename T>
-class Set
+class set
 {
     public:
-        Set()
+        set()
         {
             this->list = new LinkedList<T>();
         }
@@ -32,7 +32,7 @@ class Set
             return this->list->getSize();
         }
 
-        void Union(const Set &other)
+        void Union(const set &other)
         {
             Node<T> *currentNode;
 
@@ -42,7 +42,7 @@ class Set
             }
         }
 
-        void intersection(const Set &other)
+        void intersection(const set &other)
         {
             Node<T> *currentNode;
             LinkedList<T> *toRemove = new LinkedList<T>();
@@ -61,7 +61,7 @@ class Set
             }
         }
 
-        void difference(const Set &other)
+        void difference(const set &other)
         {
             Node<T> *currentNode;
             while((currentNode = other.list->nextNode()) != nullptr)
@@ -74,7 +74,7 @@ class Set
             }
         }
 
-        bool operator==(Set& l2)
+        bool operator==(set& l2)
         {
             return *this->list == *l2.list;
         }
