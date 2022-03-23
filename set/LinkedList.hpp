@@ -1,4 +1,5 @@
 #pragma once
+#include<string.h>
 #include "Node.hpp"
 
 using namespace std;
@@ -15,6 +16,7 @@ class LinkedList
         {
             this->size = 0;
             this->head = nullptr;
+            this->currentIterand = nullptr;
         }
         ~LinkedList()
         {
@@ -29,17 +31,29 @@ class LinkedList
 
         Node<T>* nextNode()
         {
+            // if(this->currentIterand == nullptr)
+            // {
+            //     this->currentIterand = this->head;
+            //     return this->head;
+            // }
+            // if(currentIterand->next != nullptr)
+            // {
+            //     this->currentIterand = currentIterand->next;
+            //     return currentIterand;
+            // }
+            // return nullptr;
             if(this->currentIterand == nullptr)
             {
                 this->currentIterand = this->head;
                 return this->head;
             }
-            if(currentIterand->next != nullptr)
+            if(this->currentIterand->next == nullptr)
             {
-                currentIterand = currentIterand->next;
-                return currentIterand;
+                this->currentIterand = this->head;
+                return nullptr;
             }
-            return nullptr;
+            this->currentIterand = this->currentIterand->next;
+            return this->currentIterand;
         }
 
         bool add(T element)
@@ -121,15 +135,24 @@ class LinkedList
             Node<T> *current = this->head;
             for(int i = 0; i < this->size; i++)
             {
-                if(current->value == element)
+                // if(current->value == element)
+                if(this->areEqual(current->value, element))
                 {
-                    // cout << "Element " << element << " found at: "<< i << endl;
                     return i;
                 }
                 current = current->next;
             }
-            // cout << "Element " << element << "not found" << endl;
             return -1;
+        }
+
+        bool areEqual(T first, T second)
+        {
+            return first == second;
+        }
+
+        bool areEqueal(string first, string second)
+        {
+            return first.compare(second) == 0;
         }
 
         bool removeElement(T element)

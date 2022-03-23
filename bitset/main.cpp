@@ -5,9 +5,6 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    int result = 15 - 8;
-    cout << result << endl;
-
     BitSet<0,15> *set1 = new BitSet<0,15>();
 
     set1->insert(1);

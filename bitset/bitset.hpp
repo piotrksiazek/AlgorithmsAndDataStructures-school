@@ -70,15 +70,21 @@ class BitSet
             return this->size;
         }
 
-        // void Union(const set &other)
-        // {
-           
-        // }
+        void Union(const BitSet &other)
+        {
+           for(int i = 0; i < this->numberOfBytes; i++)
+            {
+                this->tab[i] |= other.tab[i];
+            }
+        }
 
-        // void intersection(const set &other)
-        // {
-            
-        // }
+        void intersection(const BitSet &other)
+        {
+            for(int i = 0; i < this->numberOfBytes; i++)
+            {
+                this->tab[i] &= other.tab[i];
+            }
+        }
 
         // void difference(const set &other)
         // {
