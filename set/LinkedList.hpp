@@ -49,7 +49,7 @@ class LinkedList
             }
             if(this->currentIterand->next == nullptr)
             {
-                this->currentIterand = this->head;
+                this->currentIterand = nullptr;
                 return nullptr;
             }
             this->currentIterand = this->currentIterand->next;
@@ -157,7 +157,10 @@ class LinkedList
 
         bool removeElement(T element)
         {
-            return this->remove(this->locate(element));
+            int index = this->locate(element);
+            if(index != -1)
+                return this->remove(index);
+            return false;
         }
 
         T retrieve(int index)

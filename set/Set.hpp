@@ -74,9 +74,11 @@ class Set
                 T value = currentNode->value;
                 if(this->contains(value))
                 {
+
                     this->remove(value);
                 }
             }
+                        // toRemove->print();
         }
 
         bool operator==(Set& l2)
