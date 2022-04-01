@@ -13,29 +13,18 @@ class BitSet
             int numberOfElements = max - min + 1;
             this->numberOfBytes = numberOfElements / 8;
             this->tab = new unsigned char[this->numberOfBytes];
+            
+            if(numberOfElements % 8 != 0)
+            {
+                this->numberOfBytes++;
+            }
+            
+            cout<<"elements: "<<numberOfElements << " bytes: " <<numberOfBytes<<endl;
         }
 
         ~BitSet()
         {
             delete[] this->tab;
-        }
-
-        int getTabIndex(int value) const
-        {
-            return value / 8;
-        }
-
-        int getBitShift(int value, int tabIndex) const
-        {
-            return (value - tabIndex * 8);
-        }
-
-        void changeSizeCount(unsigned char oldByte, unsigned char newByte)
-        {
-            if(oldByte != newByte)
-            {
-                this->size++;
-            }
         }
         
         void insert(int value)
@@ -86,15 +75,29 @@ class BitSet
             }
         }
 
-        // void difference(const set &other)
-        // {
-            
-        // }
+        void difference(const BitSet &other)
+        {
+            for(int i = 0; i < this->numberOfBytes; i++)
+            {
+                this->tab[i] &= ~(this->tab[i] & other.tab[i]);
+            }
+        }
 
-        // bool operator==(set& l2)
-        // {
-            
-        // }
+        bool operator==(BitSet &other)
+        {
+            if(this->numberOfBytes != other.numberOfBytes)
+            {
+                return false;
+            }
+            for(int i = 0; i < this->numberOfBytes; i++)
+            {
+                if(this->tab[i] != other.tab[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         void print()
         {
@@ -108,4 +111,22 @@ class BitSet
         unsigned char *tab;
         int numberOfBytes;
         int size;
+
+        int getTabIndex(int value) const
+        {
+            return value / 8;
+        }
+
+        int getBitShift(int value, int tabIndex) const
+        {
+            return (value - tabIndex * 8);
+        }
+
+        void changeSizeCount(unsigned char oldByte, unsigned char newByte)
+        {
+            if(oldByte != newByte)
+            {
+                this->size++;
+            }
+        }
 };

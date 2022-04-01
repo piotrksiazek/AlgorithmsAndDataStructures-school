@@ -5,28 +5,14 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    BitSet<0,15> *set1 = new BitSet<0,15>();
+    BitSet<0,7> *set1 = new BitSet<0,7>();
+    BitSet<0,8> *set2 = new BitSet<0,8>();
 
-    set1->insert(1);
-    set1->insert(7);
-    set1->insert(8);
+    BitSet<0,22> *set3 = new BitSet<0,22>();
+    BitSet<0,31> *set4 = new BitSet<0,31>();
 
-    set1->insert(1);
-    set1->insert(7);
-    set1->insert(8);
-
-    set1->insert(10);
-
-    bool contains1 = set1->contains(1);
-    bool contains7 = set1->contains(7);
-    bool contains10 = set1->contains(10);
-    bool contains8 = set1->contains(8);
-
-    cout<<"contains1: "<<contains1<<endl;
-    cout<<"contains7: "<<contains7<<endl;
-    cout<<"contains10: "<<contains10<<endl;
-    cout<<"contains8: "<<contains8<<endl;
-
-    cout<<"size: " << set1->getSize() << endl;
     set1->print();
+    set2->print();
+    set3->print();
+    set4->print();
 }
